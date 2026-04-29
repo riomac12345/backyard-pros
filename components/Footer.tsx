@@ -103,20 +103,32 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 text-amber mt-0.5 shrink-0" />
-                <a
-                  href="tel:+14157288244"
-                  className="text-white/60 text-sm font-sans hover:text-white transition-colors"
-                >
+                <a href="tel:+14157288244" className="text-white/60 text-sm font-sans hover:text-white transition-colors">
                   415.728.8244
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-amber mt-0.5 shrink-0" />
-                <a
-                  href="mailto:hello@thebackyardpros.com"
-                  className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all"
-                >
-                  hello@thebackyardpros.com
+                <a href="mailto:nate@bayareabackyardpros.com" className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all">
+                  nate@bayareabackyardpros.com
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="w-4 h-4 text-amber mt-0.5 shrink-0" />
+                <a href="mailto:sales@bayareabackyardpros.com" className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all">
+                  sales@bayareabackyardpros.com
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="w-4 h-4 text-amber mt-0.5 shrink-0" />
+                <a href="mailto:install@bayareabackyardpros.com" className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all">
+                  install@bayareabackyardpros.com
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="w-4 h-4 text-amber mt-0.5 shrink-0" />
+                <a href="mailto:support@bayareabackyardpros.com" className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all">
+                  support@bayareabackyardpros.com
                 </a>
               </li>
               <li className="flex items-start gap-3">

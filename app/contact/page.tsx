@@ -18,34 +18,6 @@ const contactInfo = [
     description: "Mon–Sat, 8am–6pm",
   },
   {
-    icon: Mail,
-    label: "General",
-    value: "nate@bayareabackyardpros.com",
-    href: "mailto:nate@bayareabackyardpros.com",
-    description: "General inquiries",
-  },
-  {
-    icon: Mail,
-    label: "Sales",
-    value: "sales@bayareabackyardpros.com",
-    href: "mailto:sales@bayareabackyardpros.com",
-    description: "Buying a trampoline",
-  },
-  {
-    icon: Mail,
-    label: "Installation",
-    value: "install@bayareabackyardpros.com",
-    href: "mailto:install@bayareabackyardpros.com",
-    description: "Installation & setup",
-  },
-  {
-    icon: Mail,
-    label: "Support",
-    value: "support@bayareabackyardpros.com",
-    href: "mailto:support@bayareabackyardpros.com",
-    description: "Repairs & service",
-  },
-  {
     icon: MapPin,
     label: "Service Area",
     value: "The San Francisco Bay Area",
@@ -59,6 +31,13 @@ const contactInfo = [
     href: null,
     description: "Closed Sundays",
   },
+];
+
+const emails = [
+  { label: "General", value: "nate@bayareabackyardpros.com", href: "mailto:nate@bayareabackyardpros.com", description: "General inquiries" },
+  { label: "Sales", value: "sales@bayareabackyardpros.com", href: "mailto:sales@bayareabackyardpros.com", description: "Buying a trampoline" },
+  { label: "Installation", value: "install@bayareabackyardpros.com", href: "mailto:install@bayareabackyardpros.com", description: "Installation & setup" },
+  { label: "Support", value: "support@bayareabackyardpros.com", href: "mailto:support@bayareabackyardpros.com", description: "Repairs & service" },
 ];
 
 export default function ContactPage() {
@@ -123,6 +102,38 @@ export default function ContactPage() {
                   </div>
                 );
               })}
+
+              {/* Email — all in one card */}
+              <div className="bg-white rounded-xl p-5 shadow-card border border-cream-deeper">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-forest/10 flex items-center justify-center shrink-0">
+                    <Mail className="w-5 h-5 text-forest" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs font-sans font-semibold text-charcoal-muted uppercase tracking-wide mb-3">
+                      Email
+                    </div>
+                    <div className="space-y-2.5">
+                      {emails.map((email) => (
+                        <div key={email.label}>
+                          <div className="text-[10px] font-sans font-semibold text-charcoal-muted uppercase tracking-wide">
+                            {email.label}
+                          </div>
+                          <a
+                            href={email.href}
+                            className="font-sans text-sm text-charcoal hover:text-forest transition-colors break-all"
+                          >
+                            {email.value}
+                          </a>
+                          <div className="text-charcoal-muted text-xs font-sans">
+                            {email.description}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               {/* Service area map placeholder */}
               <div className="bg-white rounded-xl overflow-hidden shadow-card border border-cream-deeper">

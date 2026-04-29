@@ -63,7 +63,7 @@
 - **Team:** Nate + his sons Quinn and Peter (Bodhi is not included in customer-facing copy). They split up jobs independently or work together depending on the day.
 - **Service area:** The San Francisco Bay Area (not just Marin County)
 - **Phone:** 415.728.8244
-- **Email:** placeholder `hello@thebackyardpros.com` — Nate will provide a real company email when ready
+- **Email:** placeholder `nate@bayareabackyardpros.com` — Nate will provide a real company email when ready
 - **What they do:** Springfree trampoline sales (refurbished), installation, repairs, and relocation
 - **Tagline:** "Safe. Trampolines. Built to Last."
 
@@ -146,7 +146,7 @@ All real photos live in `public/images/`:
 - Shop product cards and about page photo are still placeholders — Nate will supply photos
 
 ## To-Do / Not Yet Done
-- [ ] Real company email (swap `hello@thebackyardpros.com` everywhere)
+- [ ] Real company email (swap `nate@bayareabackyardpros.com` everywhere)
 - [ ] Real Stripe keys (add to `.env.local`)
 - [ ] Shop product photos (Nate will supply photos of each trampoline size)
 - [ ] About page photo (placeholder box is there, ready to receive image)

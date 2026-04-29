@@ -86,10 +86,19 @@ export function ContactForm() {
       return;
     }
     setIsSubmitting(true);
-    // TODO: Connect form submission to backend/email service
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-    setSubmitted(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      setSubmitted(true);
+    } catch {
+      setErrors({ message: "Something went wrong. Please try again or call us directly." });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {

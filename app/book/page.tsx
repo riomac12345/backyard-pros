@@ -182,11 +182,11 @@ export default function BookPage() {
             </a>
             <span className="text-white/30 hidden sm:block">•</span>
             <a
-              href="mailto:hello@thebackyardpros.com"
+              href="mailto:nate@bayareabackyardpros.com"
               className="flex items-center gap-2 text-white font-sans font-semibold text-lg hover:text-amber transition-colors"
             >
               <Mail className="w-5 h-5" />
-              hello@thebackyardpros.com
+              nate@bayareabackyardpros.com
             </a>
           </div>
         </div>

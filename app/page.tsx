@@ -17,8 +17,8 @@ export default function HomePage() {
       <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/family.jpeg"
-            alt="Family enjoying a trampoline in their backyard"
+            src="/images/trampoline-clean.jpeg"
+            alt="Refurbished Springfree trampoline in a backyard"
             fill
             className="object-cover"
             priority
@@ -86,8 +86,8 @@ export default function HomePage() {
             {/* Image */}
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#E2DBCC]">
               <Image
-                src="/images/trampoline-clean.jpeg"
-                alt="Refurbished Springfree trampoline"
+                src="/images/family.jpeg"
+                alt="Family enjoying a trampoline in their backyard"
                 fill
                 className="object-cover"
               />

@@ -23,7 +23,7 @@ export default function HomePage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1F3D2B]/85 via-[#1F3D2B]/70 to-[#1F3D2B]/60" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1F3D2B]/60 via-[#1F3D2B]/45 to-[#1F3D2B]/35" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32 pt-40">

@@ -187,8 +187,8 @@ export default function ShopPage() {
 
                 <CardFooter className="px-5 pb-5 pt-0 flex flex-col gap-2">
                   <Button variant="amber" size="default" className="w-full" asChild>
-                    <Link href={`/checkout?product=${product.id}`}>
-                      Buy Now
+                    <Link href="/contact">
+                      Get a Quote
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </Button>

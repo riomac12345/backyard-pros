@@ -12,15 +12,15 @@ const config: Config = {
       colors: {
         // Brand palette
         forest: {
-          DEFAULT: "#2D5016",
-          light: "#3A6B1E",
-          dark: "#1E3610",
-          muted: "#4A7A2A",
+          DEFAULT: "#1F3D2B",
+          light: "#2A5239",
+          dark: "#162B1E",
+          muted: "#3A6B4A",
         },
         cream: {
-          DEFAULT: "#FAF7F2",
-          dark: "#F0EBE0",
-          deeper: "#E8E0D0",
+          DEFAULT: "#F7F4EC",
+          dark: "#EDE8DC",
+          deeper: "#E2DBCC",
         },
         charcoal: {
           DEFAULT: "#2C2C2C",
@@ -28,10 +28,10 @@ const config: Config = {
           muted: "#6B6B6B",
         },
         amber: {
-          DEFAULT: "#D4860B",
-          light: "#E8970D",
-          dark: "#B8720A",
-          pale: "#FDF3E0",
+          DEFAULT: "#C8A96A",
+          light: "#D4B87A",
+          dark: "#B09050",
+          pale: "#FAF3E3",
         },
         // shadcn/ui compat
         border: "hsl(var(--border))",

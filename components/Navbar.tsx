@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Leaf } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -46,14 +47,16 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber rounded-md"
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber rounded-md"
           >
-            <div className="w-8 h-8 rounded-full bg-forest flex items-center justify-center shadow-md shadow-forest/40 transition-transform group-hover:scale-110">
-              <Leaf className="w-4 h-4 text-white" strokeWidth={2.5} />
-            </div>
-            <span className="font-fraunces font-bold text-xl text-white tracking-tight leading-none">
-              The Bay Area Backyard Pros
-            </span>
+            <Image
+              src="/images/logo.png"
+              alt="Bay Area Backyard Pros"
+              width={120}
+              height={90}
+              className="h-10 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Leaf, Phone, Mail, MapPin, Instagram, Facebook } from "lucide-react";
+import Image from "next/image";
+import { Phone, Mail, MapPin, Instagram, Facebook } from "lucide-react";
 
 const quickLinks = [
   { href: "/", label: "Home" },
@@ -26,13 +27,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4 group w-fit">
-              <div className="w-8 h-8 rounded-full bg-forest flex items-center justify-center">
-                <Leaf className="w-4 h-4 text-white" strokeWidth={2.5} />
-              </div>
-              <span className="font-fraunces font-bold text-lg text-white">
-                The Bay Area Backyard Pros
-              </span>
+            <Link href="/" className="inline-block mb-4 w-fit">
+              <Image
+                src="/images/logo.png"
+                alt="Bay Area Backyard Pros"
+                width={140}
+                height={105}
+                className="h-16 w-auto brightness-0 invert"
+              />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6 font-sans">
               Your local Springfree trampoline specialist in Mill Valley, CA.

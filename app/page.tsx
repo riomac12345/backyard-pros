@@ -27,9 +27,15 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32 pt-40">
-          {/* Logo placeholder */}
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 border-2 border-[#C8A96A]/60 mb-8 mx-auto">
-            <span className="text-[#C8A96A] text-xs font-sans font-semibold uppercase tracking-widest">Logo</span>
+          <div className="mb-8">
+            <Image
+              src="/images/logo.png"
+              alt="Bay Area Backyard Pros"
+              width={280}
+              height={210}
+              className="mx-auto drop-shadow-lg"
+              priority
+            />
           </div>
 
           <h1 className="font-fraunces text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-[1.05] mb-6">

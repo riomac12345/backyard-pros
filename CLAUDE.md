@@ -2,6 +2,9 @@
 
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
+- **After completing any frontend changes**, invoke the `ai-audit` skill automatically — do not wait to be asked.
+- **After building or significantly modifying any component**, invoke the `component-review` skill automatically.
+- **Before adding or modifying any animation or transition**, invoke the `motion-design` skill automatically.
 
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
@@ -10,9 +13,10 @@
 
 ## Local Server
 - **Always serve on localhost** — never screenshot a `file:///` URL.
-- Start the dev server: `node serve.mjs` (serves the project root at `http://localhost:3000`)
-- `serve.mjs` lives in the project root. Start it in the background before taking any screenshots.
+- Start the dev server: `npm run dev` — runs on port 3000 (or 3001 if 3000 is taken)
 - If the server is already running, do not start a second instance.
+- To restart cleanly: `lsof -ti:3000 | xargs -r kill -9` then `npm run dev`
+- After changing images, clear Next.js image cache: `rm -rf .next/cache/images`
 
 ## Screenshot Workflow
 - Puppeteer is installed locally (`node_modules/puppeteer`). Chrome is at `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`.
@@ -34,6 +38,19 @@
 - Always check the `brand_assets/` folder before designing. It may contain logos, color guides, style guides, or images.
 - If assets exist there, use them. Do not use placeholders where real assets are available.
 - If a logo is present, use it. If a color palette is defined, use those exact values — do not invent brand colors.
+
+## Brand Guide — Read Before Any Logo or Design Work
+- **Before adding, changing, or placing any logo or visual element, open and read `brand_assets/BAY_AREA_BACKYARD_PROS_BRAND_GUIDE_WITH_IMAGES.pdf`.**
+- Use `pdfimages` (full path: `/opt/homebrew/Cellar/poppler/26.04.0/bin/pdfimages`) to extract embedded images from the PDF.
+- The brand guide defines which logo goes where, correct colors, typography, clear space rules, and alternate versions.
+
+## Logo Reference (current state)
+- **`public/images/logo-primary.png`** — the primary badge logo (SF skyline, "BACKYARD PROS"). Extracted from `brand-logos-000.png` (the brand spec sheet page). Transparent outer background, white inner fill. Used in both the navbar and hero.
+- **`public/images/logo-color.png`** — the secondary oval badge (with playground scene, white background). Used only in the footer with `brightness-0 invert` to render white.
+- **`public/images/logo-badge.png`** — no longer used anywhere.
+- **Do not apply `brightness(0) invert(1)` to `logo-primary.png`** — the badge has a white interior fill, so the filter turns it into a solid white blob. Show it in natural colors.
+- **Navbar:** `logo-primary.png` at `h-16 w-auto`, no CSS filter. Navbar height is `h-24`.
+- **Hero:** `logo-primary.png` at `w-[320px] sm:w-[420px] h-auto`, no CSS filter.
 
 ## Anti-Generic Guardrails
 - **Colors:** Never use default Tailwind palette (indigo-500, blue-600, etc.). Pick a custom brand color and derive from it.
@@ -96,7 +113,7 @@ Custom Tailwind tokens defined in `tailwind.config.ts`:
 | `/contact` | Contact form (client component) + contact info |
 
 ## Key Components
-- `components/Navbar.tsx` — always `bg-charcoal`, white text, amber "Book Now" button, leaf icon
+- `components/Navbar.tsx` — always `bg-charcoal`, white text, amber "Book Now" button, `logo-primary.png` in natural colors (no filter)
 - `components/Footer.tsx` — dark footer with links, phone, service area
 - `components/ContactForm.tsx` — `"use client"` form (split from contact/page.tsx to allow metadata)
 - `components/ui/button.tsx` — variants: default, amber, outline, ghost, link, outline-amber, forest
@@ -138,19 +155,26 @@ Zip code lookup lives in `lib/delivery.ts`.
 
 ## Images
 All real photos live in `public/images/`:
-- `hero.jpeg` — hero background (home page)
-- `repairs-tech.jpeg` — person working on trampoline (repairs section) — text was cropped out of this image
+- `trampoline-clean.jpeg` — hero background (home page) — clean trampoline in a backyard
+- `family.jpeg` — kids playing on a trampoline, used in the services section
+- `repairs-tech.jpeg` — person working on trampoline (repairs section)
 - `installation.jpeg` — assembled trampoline in backyard (installation section)
 - `sales.jpeg` — sales section image
-- Original source files are in `brand_assets/`
+- `trampoline-oval.jpeg` — oval trampoline photo
+- Original source files are in `brand_assets/` (IMG_*.jpeg / IMG_*.heic)
 - Shop product cards and about page photo are still placeholders — Nate will supply photos
+
+## Contact Form
+- `components/ContactForm.tsx` is wired to **Formspree** via `fetch` to `https://formspree.io/f/${formspreeId}`
+- The Formspree form ID is read from `process.env.NEXT_PUBLIC_FORMSPREE_ID`
+- Not functional until Nate creates a Formspree account and adds the real ID to `.env.local`
 
 ## To-Do / Not Yet Done
 - [ ] Real company email (swap `nate@bayareabackyardpros.com` everywhere)
 - [ ] Real Stripe keys (add to `.env.local`)
+- [ ] Formspree form ID — add `NEXT_PUBLIC_FORMSPREE_ID` to `.env.local`
 - [ ] Shop product photos (Nate will supply photos of each trampoline size)
 - [ ] About page photo (placeholder box is there, ready to receive image)
-- [ ] Wire up contact form to actually send emails (currently no backend — use Formspree or Resend)
 - [ ] Set up Calendly (or similar) on the book page
 - [ ] Deploy to Vercel + connect domain
 
@@ -162,3 +186,22 @@ All real photos live in `public/images/`:
 - Navbar is always solid `bg-charcoal` — never transparent or scroll-triggered
 - No gradient bridges between page sections
 - Bodhi is Nate's son but is NOT mentioned in customer-facing copy — only Quinn and Peter
+- Shop page uses "Get a Quote" → `/contact`, not "Buy Now" — intentional, no direct purchase flow yet
+- Hero overlay should be subtle — previous preference was lighter/more transparent overlays, not heavy dark gradients
+
+## How Rio Works
+- **Never auto-push to GitHub or deploy to Vercel** — only make local changes unless explicitly told otherwise
+- **Screenshot after every single change** without being asked — not just at the end of a task
+- Rio often communicates via voice-to-text — expect typos and autocorrect. Parse intent, don't ask for clarification on obvious typos
+- Rio sends screenshots from his own browser to show issues — what he sees may differ from Puppeteer screenshots if there's a caching issue, so always check both
+- When shown options (e.g. "option 1 vs option 2"), Rio picks by number — implement the chosen option, don't ask follow-up questions
+- Rio gives direct feedback ("no change it back", "I like it better before") — revert immediately without pushback
+- Prefers subtle, refined visual effects over dramatic ones — err on the side of less
+
+## Technical Gotchas
+- **Homebrew is not in PATH** for Claude's shell — always use full paths: `/opt/homebrew/bin/` or specific tool paths
+- **pdfimages** full path: `/opt/homebrew/Cellar/poppler/26.04.0/bin/pdfimages`
+- **Python PIL** is available for image processing (flood fill, cropping, transparency)
+- **Next.js image cache** must be cleared after replacing image files: `rm -rf .next/cache/images`
+- **Port conflicts** — always kill port 3000 before restarting dev server: `lsof -ti:3000 | xargs -r kill -9`
+- For zoomed navbar screenshots, write a temporary inline Puppeteer script using `page.screenshot({ clip: {...} })` — don't rely on the default `screenshot.mjs` for cropped views

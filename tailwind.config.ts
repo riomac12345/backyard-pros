@@ -92,8 +92,8 @@ const config: Config = {
       boxShadow: {
         "card": "0 1px 3px rgba(44,44,44,0.06), 0 4px 16px rgba(44,44,44,0.08), 0 8px 32px rgba(44,44,44,0.04)",
         "card-hover": "0 4px 8px rgba(44,44,44,0.08), 0 12px 32px rgba(44,44,44,0.12), 0 20px 48px rgba(44,44,44,0.06)",
-        "amber": "0 4px 16px rgba(212,134,11,0.35), 0 1px 4px rgba(212,134,11,0.2)",
-        "amber-hover": "0 6px 24px rgba(212,134,11,0.45), 0 2px 8px rgba(212,134,11,0.3)",
+        "amber": "0 4px 16px rgba(200,169,106,0.5), 0 1px 4px rgba(200,169,106,0.3)",
+        "amber-hover": "0 6px 24px rgba(200,169,106,0.65), 0 2px 8px rgba(200,169,106,0.4)",
         "forest": "0 4px 16px rgba(45,80,22,0.25), 0 1px 4px rgba(45,80,22,0.15)",
       },
       keyframes: {

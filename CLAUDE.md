@@ -39,11 +39,6 @@
 - If assets exist there, use them. Do not use placeholders where real assets are available.
 - If a logo is present, use it. If a color palette is defined, use those exact values — do not invent brand colors.
 
-## Brand Guide — Read Before Any Logo or Design Work
-- **Before adding, changing, or placing any logo or visual element, open and read `brand_assets/BAY_AREA_BACKYARD_PROS_BRAND_GUIDE_WITH_IMAGES.pdf`.**
-- Use `pdfimages` (full path: `/opt/homebrew/Cellar/poppler/26.04.0/bin/pdfimages`) to extract embedded images from the PDF.
-- The brand guide defines which logo goes where, correct colors, typography, clear space rules, and alternate versions.
-
 ## Logo Reference (current state)
 - **`public/images/logo-primary.png`** — the primary badge logo (SF skyline, "BACKYARD PROS"). Extracted from `brand-logos-000.png` (the brand spec sheet page). Transparent outer background, white inner fill. Used in both the navbar and hero.
 - **`public/images/logo-color.png`** — the secondary oval badge (with playground scene, white background). Used only in the footer with `brightness-0 invert` to render white.
@@ -200,7 +195,6 @@ All real photos live in `public/images/`:
 
 ## Technical Gotchas
 - **Homebrew is not in PATH** for Claude's shell — always use full paths: `/opt/homebrew/bin/` or specific tool paths
-- **pdfimages** full path: `/opt/homebrew/Cellar/poppler/26.04.0/bin/pdfimages`
 - **Python PIL** is available for image processing (flood fill, cropping, transparency)
 - **Next.js image cache** must be cleared after replacing image files: `rm -rf .next/cache/images`
 - **Port conflicts** — always kill port 3000 before restarting dev server: `lsof -ti:3000 | xargs -r kill -9`

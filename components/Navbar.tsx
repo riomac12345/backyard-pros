@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -47,16 +46,17 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber rounded-md"
+            className="flex flex-col items-center leading-none gap-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber rounded-md"
           >
-            <Image
-              src="/images/logo-primary.png"
-              alt="Bay Area Backyard Pros"
-              width={1464}
-              height={851}
-              className="h-16 w-auto"
-              priority
-            />
+            <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-amber font-semibold">
+              Bay Area
+            </span>
+            <span className="font-fraunces text-[30px] font-bold text-white leading-none tracking-tight uppercase">
+              Backyard
+            </span>
+            <span className="font-fraunces text-[18px] font-bold text-amber tracking-[0.2em] leading-tight uppercase">
+              Pros
+            </span>
           </Link>
 
           {/* Desktop Nav */}

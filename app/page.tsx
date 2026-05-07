@@ -29,17 +29,17 @@ export default function HomePage() {
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32 pt-40">
           <div className="mb-8">
             <Image
-              src="/images/logo-primary.png"
+              src="/images/logo-hex.png"
               alt="Bay Area Backyard Pros"
-              width={1464}
-              height={851}
-              className="mx-auto w-[320px] sm:w-[420px] h-auto drop-shadow-2xl"
+              width={500}
+              height={500}
+              className="mx-auto w-[260px] sm:w-[320px] h-auto drop-shadow-2xl rounded-2xl"
               priority
             />
           </div>
 
           <h1 className="font-fraunces text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-[1.05] mb-6" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
-            <span className="text-[#C8A96A]">Premium Refurbished Trampolines</span>{" "}
+            <span className="text-[#C8A96A]">Premium Refurbished Springfree Trampolines</span>{" "}
             for Bay Area Families
           </h1>
 

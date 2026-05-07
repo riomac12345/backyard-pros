@@ -27,13 +27,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-4 w-fit">
+            <Link href="/" className="inline-block mb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber rounded-md">
               <Image
-                src="/images/logo-color.png"
+                src="/images/logo-hex.png"
                 alt="Bay Area Backyard Pros"
-                width={140}
-                height={105}
-                className="h-16 w-auto brightness-0 invert"
+                width={120}
+                height={120}
+                className="h-24 w-auto"
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6 font-sans">

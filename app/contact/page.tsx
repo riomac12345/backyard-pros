@@ -66,7 +66,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Contact Info */}
-            <div className="lg:col-span-1 space-y-4">
+            <div className="lg:col-span-1 space-y-4 order-2 lg:order-1">
               {contactInfo.map((info) => {
                 const Icon = info.icon;
                 return (
@@ -160,7 +160,7 @@ export default function ContactPage() {
             </div>
 
             {/* Contact Form (client component) */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 order-1 lg:order-2">
               <ContactForm />
             </div>
           </div>

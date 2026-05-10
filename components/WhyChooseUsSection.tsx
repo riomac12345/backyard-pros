@@ -12,8 +12,11 @@ const items = [
 
 export function WhyChooseUsSection() {
   const [inView, setInView] = useState(false);
-  // Increments each time we enter view — forces keyed elements to remount & replay animations
   const [animKey, setAnimKey] = useState(0);
+  // Tracks tap count per card — incrementing the key forces animation to restart
+  const [tapCounts, setTapCounts] = useState<Record<string, number>>({});
+  // Tracks which card is glowing after a tap
+  const [tappedCard, setTappedCard] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,6 +37,12 @@ export function WhyChooseUsSection() {
     return () => obs.disconnect();
   }, []);
 
+  const handleTap = (label: string) => {
+    setTapCounts((prev) => ({ ...prev, [label]: (prev[label] || 0) + 1 }));
+    setTappedCard(label);
+    setTimeout(() => setTappedCard(null), 450);
+  };
+
   return (
     <section className="py-16 lg:py-24 bg-forest overflow-hidden relative">
       <style>{`
@@ -52,6 +61,14 @@ export function WhyChooseUsSection() {
           0%   { opacity: 0; transform: translateX(-100%) skewX(-12deg); }
           50%  { opacity: 1; }
           100% { opacity: 0; transform: translateX(200%) skewX(-12deg); }
+        }
+        @keyframes icon-tap {
+          0%   { transform: scale(1) rotate(0deg); }
+          20%  { transform: scale(0.78) rotate(-10deg); }
+          55%  { transform: scale(1.22) rotate(6deg); }
+          75%  { transform: scale(0.95) rotate(-2deg); }
+          90%  { transform: scale(1.05) rotate(1deg); }
+          100% { transform: scale(1) rotate(0deg); }
         }
       `}</style>
 
@@ -77,69 +94,83 @@ export function WhyChooseUsSection() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8">
-          {items.map((item) => (
-            <div
-              key={item.label}
-              className={cn(
-                "group relative flex flex-col items-center gap-4 rounded-2xl p-6 sm:p-8 cursor-default overflow-hidden",
-                "bg-white/[0.08] border border-white/10",
-                "hover:bg-white/[0.13] hover:border-amber/25",
-                "hover:shadow-[0_8px_40px_rgba(200,169,106,0.12)]",
-                "transition-[background-color,border-color,box-shadow] duration-300 ease-out",
-              )}
-              style={{
-                opacity: inView ? 1 : 0,
-                transform: inView
-                  ? "translateX(0) translateY(0) scale(1)"
-                  : `translateX(${item.dx}px) translateY(${item.dy}px) scale(0.84)`,
-                transition: inView
-                  ? `opacity 550ms ease-out ${item.delay}ms, transform 750ms cubic-bezier(0.34, 1.56, 0.64, 1) ${item.delay}ms`
-                  : "none",
-                willChange: "opacity, transform",
-              }}
-            >
-              {/* Shine sweep — remounts each entry via animKey */}
-              {inView && (
-                <span
-                  key={animKey}
-                  className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent pointer-events-none"
-                  style={{
-                    animation: `card-shine 0.7s ease-out ${item.delay + 200}ms both`,
-                  }}
-                />
-              )}
+          {items.map((item) => {
+            const tapCount = tapCounts[item.label] || 0;
+            const isTapped = tappedCard === item.label;
 
-              {/* Icon */}
-              <div className="relative flex items-center justify-center">
-                {/* Ripple — remounts each entry */}
+            return (
+              <div
+                key={item.label}
+                onClick={() => handleTap(item.label)}
+                className={cn(
+                  "group relative flex flex-col items-center gap-4 rounded-2xl p-6 sm:p-8 cursor-pointer overflow-hidden select-none",
+                  "bg-white/[0.08] border",
+                  "transition-[background-color,border-color,box-shadow] duration-300 ease-out",
+                  isTapped
+                    ? "bg-white/[0.15] border-amber/50 shadow-[0_0_0_1px_rgba(200,169,106,0.3),0_8px_40px_rgba(200,169,106,0.18)]"
+                    : "border-white/10 hover:bg-white/[0.13] hover:border-amber/25 hover:shadow-[0_8px_40px_rgba(200,169,106,0.12)]",
+                )}
+                style={{
+                  opacity: inView ? 1 : 0,
+                  transform: inView
+                    ? "translateX(0) translateY(0) scale(1)"
+                    : `translateX(${item.dx}px) translateY(${item.dy}px) scale(0.84)`,
+                  transition: inView
+                    ? `opacity 550ms ease-out ${item.delay}ms, transform 750ms cubic-bezier(0.34, 1.56, 0.64, 1) ${item.delay}ms`
+                    : "none",
+                  willChange: "opacity, transform",
+                }}
+              >
+                {/* Shine sweep on scroll entry */}
                 {inView && (
                   <span
                     key={animKey}
-                    className="absolute w-12 h-12 rounded-full bg-amber/25"
-                    style={{
-                      animation: `ring-ripple 0.9s cubic-bezier(0.2, 0, 0.8, 1) ${item.delay + 300}ms both`,
-                    }}
+                    className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent pointer-events-none"
+                    style={{ animation: `card-shine 0.7s ease-out ${item.delay + 200}ms both` }}
                   />
                 )}
-                {/* Icon container — remounts each entry to restart pop */}
-                <div
-                  key={animKey}
-                  className="relative w-12 h-12 rounded-full bg-amber/20 flex items-center justify-center transition-[background-color] duration-300 ease-out group-hover:bg-amber/35"
-                  style={{
-                    animation: inView
-                      ? `icon-pop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) ${item.delay + 120}ms both`
-                      : "none",
-                  }}
-                >
-                  <CheckCircle2 className="w-6 h-6 text-amber" />
-                </div>
-              </div>
 
-              <p className="font-fraunces font-semibold text-white text-lg leading-snug">
-                {item.label}
-              </p>
-            </div>
-          ))}
+                {/* Icon */}
+                <div className="relative flex items-center justify-center">
+                  {inView && (
+                    <span
+                      key={animKey}
+                      className="absolute w-12 h-12 rounded-full bg-amber/25"
+                      style={{
+                        animation: `ring-ripple 0.9s cubic-bezier(0.2, 0, 0.8, 1) ${item.delay + 300}ms both`,
+                      }}
+                    />
+                  )}
+                  <div
+                    key={`icon-${animKey}`}
+                    className="relative w-12 h-12 rounded-full bg-amber/20 flex items-center justify-center transition-[background-color] duration-300 ease-out"
+                    style={{
+                      animation: inView
+                        ? `icon-pop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) ${item.delay + 120}ms both`
+                        : "none",
+                    }}
+                  >
+                    {/* Tap animation on the icon itself */}
+                    <span
+                      key={`tap-${tapCount}`}
+                      style={{
+                        display: "flex",
+                        animation: tapCount > 0
+                          ? "icon-tap 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both"
+                          : "none",
+                      }}
+                    >
+                      <CheckCircle2 className="w-6 h-6 text-amber" />
+                    </span>
+                  </div>
+                </div>
+
+                <p className="font-fraunces font-semibold text-white text-lg leading-snug">
+                  {item.label}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

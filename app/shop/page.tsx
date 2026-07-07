@@ -1,51 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Info, Truck, Package } from "lucide-react";
+import { ArrowRight, CheckCircle2, Info, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { createClient } from "@/lib/supabase/server";
+import { ProductGrid } from "@/components/shop/ProductGrid";
+import type { Product } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Shop — Refurbished Springfree Trampolines",
   description:
     "Browse our inventory of refurbished Springfree trampolines. All inspected, restored, and priced at around 50% off retail.",
 };
-
-const products = [
-  {
-    id: "10ft-round",
-    name: "Springfree 10ft Round",
-    size: "10ft Round",
-    price: 800,
-    originalPrice: 1600,
-    description:
-      "Our most popular size — perfect for most backyards. Fully inspected and ready to bounce. The classic round shape with Springfree's signature spring-free safety design.",
-    inStock: true,
-    image: null,
-  },
-  {
-    id: "8x13-oval",
-    name: "Springfree 8x13ft Oval",
-    size: "8×13ft Oval",
-    price: 950,
-    originalPrice: 1900,
-    description:
-      "Great for families with multiple kids. The oval shape maximizes the jumping area while fitting narrower backyards. Fully refurbished and tested.",
-    inStock: true,
-    image: null,
-  },
-  {
-    id: "11x11-square",
-    name: "Springfree 11x11ft Square",
-    size: "11×11ft Square",
-    price: 975,
-    originalPrice: 1950,
-    description:
-      "Maximum space, maximum fun. The square shape lets you use every corner of the jumping surface. New enclosure net installed.",
-    inStock: true,
-    image: null,
-  },
-];
 
 const addOns = [
   {
@@ -99,7 +65,15 @@ const deliveryZones = [
   },
 ];
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const supabase = await createClient();
+  const { data: productsData } = await supabase
+    .from("products")
+    .select("*")
+    .order("sort_order", { ascending: true });
+
+  const products = (productsData ?? []) as Product[];
+
   return (
     <>
       {/* Hero */}
@@ -133,7 +107,7 @@ export default function ShopPage() {
 
           <div className="mt-6 flex items-center gap-4">
             <span className="text-charcoal-muted text-sm font-sans">
-              <span className="text-forest font-semibold">{products.filter(p => p.inStock).length}</span>{" "}
+              <span className="text-forest font-semibold">{products.filter(p => p.in_stock).length}</span>{" "}
               units currently available
             </span>
           </div>
@@ -143,62 +117,7 @@ export default function ShopPage() {
       {/* Product Grid */}
       <section className="pb-16 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product) => (
-              <Card
-                key={product.id}
-                className="group overflow-hidden hover:shadow-card-hover hover:-translate-y-1 transition-[transform,box-shadow] duration-300"
-              >
-                {/* Product Image */}
-                <div className="relative aspect-[6/5] overflow-hidden flex flex-col items-center justify-center gap-2 border-b border-cream-deeper">
-                  <div className="w-12 h-12 rounded-full bg-charcoal/10 flex items-center justify-center">
-                    <Package className="w-6 h-6 text-charcoal/30" />
-                  </div>
-                  <span className="text-charcoal/30 text-xs font-sans">Photo coming soon</span>
-                  <div className="absolute top-3 left-3">
-                    <Badge variant="condition">~50% off retail</Badge>
-                  </div>
-                </div>
-
-                <CardContent className="p-5">
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <div>
-                      <h3 className="font-fraunces font-semibold text-lg text-charcoal leading-tight">
-                        {product.name}
-                      </h3>
-                      <Badge variant="secondary" className="text-xs mt-1">
-                        {product.size}
-                      </Badge>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <div className="font-fraunces font-bold text-2xl text-charcoal">
-                        ${product.price.toLocaleString()}
-                      </div>
-                      <div className="text-charcoal-muted text-xs font-sans line-through mt-0.5">
-                        ~${product.originalPrice.toLocaleString()} new
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-charcoal-muted text-sm font-sans leading-relaxed mt-3">
-                    {product.description}
-                  </p>
-                </CardContent>
-
-                <CardFooter className="px-5 pb-5 pt-0 flex flex-col gap-2">
-                  <Button variant="amber" size="default" className="w-full" asChild>
-                    <Link href="/contact">
-                      Get a Quote
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </Button>
-                  <Button variant="outline" size="default" className="w-full" asChild>
-                    <Link href="/contact">Ask a Question</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
+          <ProductGrid products={products} />
         </div>
       </section>
 

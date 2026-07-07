@@ -11,7 +11,6 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/shop", label: "Shop" },
-  { href: "/book", label: "Book" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -85,7 +84,7 @@ export function Navbar() {
               asChild
               className="hidden md:inline-flex"
             >
-              <Link href="/book">Book Now</Link>
+              <Link href="/contact">Get a Quote</Link>
             </Button>
 
             <button
@@ -128,7 +127,7 @@ export function Navbar() {
             ))}
             <div className="mt-3 pt-3 border-t border-white/10">
               <Button variant="amber" size="default" className="w-full" asChild>
-                <Link href="/book">Book Now</Link>
+                <Link href="/contact">Get a Quote</Link>
               </Button>
             </div>
           </div>

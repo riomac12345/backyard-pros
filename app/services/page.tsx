@@ -56,10 +56,10 @@ const services = [
       "Serving Mill Valley and the greater Bay Area",
       "Flexible scheduling around your family's routine",
     ],
-    cta: "Book Installation",
-    ctaHref: "/book",
-    ctaSecondary: "Request Quote",
-    ctaSecondaryHref: "/contact",
+    cta: "Get a Quote",
+    ctaHref: "/contact",
+    ctaSecondary: "Call 415.728.8244",
+    ctaSecondaryHref: "tel:+14157288244",
     accentColor: "amber",
     imageHint: "Trampoline installation in backyard",
     image: "/images/installation.jpeg" as string | undefined,
@@ -79,10 +79,10 @@ const services = [
       "Most repairs completed in a single visit",
       "Satisfaction guarantee on all repairs",
     ],
-    cta: "Book Repair",
-    ctaHref: "/book",
-    ctaSecondary: "Request Quote",
-    ctaSecondaryHref: "/contact",
+    cta: "Get a Quote",
+    ctaHref: "/contact",
+    ctaSecondary: "Call 415.728.8244",
+    ctaSecondaryHref: "tel:+14157288244",
     accentColor: "forest",
     imageHint: "Trampoline repair service",
     image: "/images/repairs-tech.jpeg" as string | undefined,
@@ -102,10 +102,10 @@ const services = [
       "Available anywhere in the Bay Area",
       "Flexible scheduling around your move date",
     ],
-    cta: "Book Relocation",
-    ctaHref: "/book",
-    ctaSecondary: "Request Quote",
-    ctaSecondaryHref: "/contact",
+    cta: "Get a Quote",
+    ctaHref: "/contact",
+    ctaSecondary: "Call 415.728.8244",
+    ctaSecondaryHref: "tel:+14157288244",
     accentColor: "amber",
     imageHint: "Moving a trampoline safely",
     image: undefined as string | undefined,
@@ -253,7 +253,7 @@ export default function ServicesPage() {
               asChild
               className="bg-white/10 text-white border border-white/20 hover:bg-white/20"
             >
-              <Link href="/book">Book Appointment</Link>
+              <Link href="tel:+14157288244">Call 415.728.8244</Link>
             </Button>
           </div>
         </div>

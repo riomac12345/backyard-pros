@@ -121,7 +121,7 @@ export default function ShopPage() {
               available.
             </p>
 
-            <div className="inline-flex items-start gap-3 bg-forest/8 border border-forest/15 rounded-xl px-5 py-4 max-w-2xl">
+            <div className="inline-flex items-start gap-3 border border-forest/15 rounded-xl px-5 py-4 max-w-2xl">
               <Info className="w-5 h-5 text-forest mt-0.5 shrink-0" />
               <p className="text-charcoal text-sm font-sans leading-relaxed">
                 <span className="font-semibold text-forest">Quality Promise:</span>{" "}
@@ -150,7 +150,7 @@ export default function ShopPage() {
                 className="group overflow-hidden hover:shadow-card-hover hover:-translate-y-1 transition-[transform,box-shadow] duration-300"
               >
                 {/* Product Image */}
-                <div className="relative aspect-[6/5] overflow-hidden bg-charcoal/8 flex flex-col items-center justify-center gap-2 border-b border-cream-deeper">
+                <div className="relative aspect-[6/5] overflow-hidden flex flex-col items-center justify-center gap-2 border-b border-cream-deeper">
                   <div className="w-12 h-12 rounded-full bg-charcoal/10 flex items-center justify-center">
                     <Package className="w-6 h-6 text-charcoal/30" />
                   </div>

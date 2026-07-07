@@ -65,7 +65,8 @@ function CheckoutInner() {
   function calcAddOnsTotal() {
     return selectedAddOns.reduce((sum, sel) => {
       const addon = addOns.find(a => a.id === sel.id)!;
-      if (addon.id === "leveling") return sum + addon.price;
+      // Leveling is quoted and paid on-site — never part of the upfront total
+      if (addon.id === "leveling") return sum;
       return sum + (sel.withInstall && addon.withInstall ? addon.withInstall! : addon.price);
     }, 0);
   }
@@ -84,12 +85,11 @@ function CheckoutInner() {
           productId,
           selectedAddOns,
           zip,
-          deliveryFee: zipResult && zipResult !== "not-found" ? zipResult.fee : 0,
-          deliveryLabel: zipResult && zipResult !== "not-found" ? zipResult.label : null,
         }),
       });
       const { url, error } = await res.json();
       if (error) throw new Error(error);
+      if (!url) throw new Error("No checkout URL returned");
       window.location.href = url;
     } catch (e) {
       alert("Something went wrong. Please try again.");
@@ -262,7 +262,7 @@ function CheckoutInner() {
               </div>
 
               {selectedAddOns.some(a => a.id === "leveling") && (
-                <p className="text-charcoal-muted text-xs font-sans mt-2">* Yard leveling cost confirmed on-site if needed.</p>
+                <p className="text-charcoal-muted text-xs font-sans mt-2">* Yard leveling is quoted and paid on-site — not included in this total.</p>
               )}
 
               <Button

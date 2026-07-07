@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 export const metadata: Metadata = {
   title: "About — Local Experts You Can Trust",
   description:
-    "Meet Nate Macdonald and his three boys Quinn, Peter, and Bodhi — the Mill Valley family behind The Bay Area Backyard Pros. Expert Springfree trampoline service built on trust.",
+    "Meet Nate Macdonald and his sons Quinn and Peter — the Mill Valley family behind The Bay Area Backyard Pros. Expert Springfree trampoline service built on trust.",
 };
 
 const values = [
@@ -34,7 +34,7 @@ const values = [
     icon: Users,
     title: "Community Roots",
     description:
-      "We&apos;re a father and his three boys from Mill Valley. We know these streets, we know these families, and we care about doing right by our community. Word of mouth is everything to us.",
+      "We're a father and his sons from Mill Valley. We know these streets, we know these families, and we care about doing right by our community. Word of mouth is everything to us.",
   },
 ];
 
@@ -43,7 +43,6 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <section className="relative pt-32 pb-24 bg-cream-dark overflow-hidden">
-        <div className="absolute -top-20 right-0 w-[400px] h-[400px] bg-forest/6 rounded-full blur-[100px]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Text */}
@@ -58,7 +57,7 @@ export default function AboutPage() {
               </h1>
               <p className="text-charcoal-muted text-xl font-sans leading-relaxed mb-10">
                 Hi — I&apos;m Nate Macdonald, a Mill Valley teacher, and together
-                with my three boys Quinn, Peter, and Bodhi, we run The Bay Area Backyard Pros.
+                with my sons Quinn and Peter, we run The Bay Area Backyard Pros.
                 Sometimes we work jobs together, sometimes we split up and cover
                 more ground — but it&apos;s always one of us showing up for you.
               </p>
@@ -120,7 +119,7 @@ export default function AboutPage() {
             </p>
             <p>
               Three years in, we&apos;ve helped hundreds of families across Mill
-              Valley, Tiburon, San Rafael, and beyond. Sometimes all four of us
+              Valley, Tiburon, San Rafael, and beyond. Sometimes all of us
               are on the same job; sometimes Quinn or Peter heads out
               solo. Either way, every job gets the same care and attention.
               These are our neighbors — we don&apos;t cut corners.
@@ -195,12 +194,12 @@ export default function AboutPage() {
           </h2>
           <p className="text-white/65 text-lg font-sans leading-relaxed mb-8">
             Whether you need a trampoline, an installation, a repair, or just
-            some advice — Nate, Quinn, Peter, and Bodhi are here for it.
+            some advice — Nate, Quinn, and Peter are here for it.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button variant="amber" size="xl" asChild>
-              <Link href="/book">
-                Book a Service
+              <Link href="/contact">
+                Get in Touch
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>
@@ -209,7 +208,7 @@ export default function AboutPage() {
               asChild
               className="bg-white/15 text-white border border-white/25 hover:bg-white/25"
             >
-              <Link href="/contact">Get in Touch</Link>
+              <Link href="/shop">Shop Trampolines</Link>
             </Button>
           </div>
         </div>

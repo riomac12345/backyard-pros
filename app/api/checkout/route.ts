@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { getDeliveryFee } from "@/lib/delivery";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "sk_test_placeholder", {
   apiVersion: "2026-04-22.dahlia",
@@ -11,9 +12,10 @@ const products: Record<string, { name: string; price: number }> = {
   "11x11-square": { name: "Springfree 11×11ft Square", price: 975 },
 };
 
+// Yard leveling is intentionally absent: its cost ($50–$150) is confirmed
+// on-site and collected separately, never charged through Stripe.
 const addOns: Record<string, { name: string; price: number; installPrice?: number }> = {
   hoop:      { name: "Basketball Hoop",          price: 75,  installPrice: 120 },
-  leveling:  { name: "Yard Leveling",            price: 100 },
   scooter:   { name: "Trampoline Scooter",       price: 50 },
   sprinkler: { name: "Trampoline Sprinkler",     price: 40,  installPrice: 80 },
   lights:    { name: "Trampoline Lights (Solar)", price: 40, installPrice: 80 },
@@ -21,10 +23,17 @@ const addOns: Record<string, { name: string; price: number; installPrice?: numbe
 
 export async function POST(req: NextRequest) {
   try {
-    const { productId, selectedAddOns, deliveryFee, deliveryLabel } = await req.json();
+    const { productId, selectedAddOns, zip } = await req.json();
 
     const product = products[productId];
     if (!product) return NextResponse.json({ error: "Invalid product" }, { status: 400 });
+
+    // Always compute the delivery fee server-side from the zip code —
+    // never trust a fee sent by the client.
+    const delivery = getDeliveryFee(typeof zip === "string" ? zip : "");
+    if (!delivery) {
+      return NextResponse.json({ error: "We don't deliver to that zip code" }, { status: 400 });
+    }
 
     const lineItems: Stripe.Checkout.SessionCreateParams["line_items"] = [
       {
@@ -51,16 +60,14 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    if (deliveryFee > 0) {
-      lineItems.push({
-        price_data: {
-          currency: "usd",
-          product_data: { name: `Delivery & Setup — ${deliveryLabel ?? "Bay Area"}` },
-          unit_amount: deliveryFee * 100,
-        },
-        quantity: 1,
-      });
-    }
+    lineItems.push({
+      price_data: {
+        currency: "usd",
+        product_data: { name: `Delivery & Setup — ${delivery.label}` },
+        unit_amount: delivery.fee * 100,
+      },
+      quantity: 1,
+    });
 
     const origin = req.headers.get("origin") ?? "http://localhost:3000";
 

@@ -130,7 +130,7 @@ export function ContactForm() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button variant="forest" size="lg" asChild>
-            <Link href="/book">Book an Appointment</Link>
+            <Link href="/shop">Browse Trampolines</Link>
           </Button>
           <Button
             variant="outline"
@@ -211,7 +211,7 @@ export function ContactForm() {
               type="tel"
               value={form.phone}
               onChange={handleChange}
-              placeholder="(403) 555-0000"
+              placeholder="(415) 555-0000"
             />
           </div>
         </div>

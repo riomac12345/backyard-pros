@@ -40,12 +40,12 @@
 - If a logo is present, use it. If a color palette is defined, use those exact values — do not invent brand colors.
 
 ## Logo Reference (current state)
-- **`public/images/logo-primary.png`** — the primary badge logo (SF skyline, "BACKYARD PROS"). Extracted from `brand-logos-000.png` (the brand spec sheet page). Transparent outer background, white inner fill. Used in both the navbar and hero.
-- **`public/images/logo-color.png`** — the secondary oval badge (with playground scene, white background). Used only in the footer with `brightness-0 invert` to render white.
-- **`public/images/logo-badge.png`** — no longer used anywhere.
-- **Do not apply `brightness(0) invert(1)` to `logo-primary.png`** — the badge has a white interior fill, so the filter turns it into a solid white blob. Show it in natural colors.
-- **Navbar:** `logo-primary.png` at `h-16 w-auto`, no CSS filter. Navbar height is `h-24`.
-- **Hero:** `logo-primary.png` at `w-[320px] sm:w-[420px] h-auto`, no CSS filter.
+- **Navbar:** a text wordmark (no image) — three stacked lines: "BAY AREA" (amber, small caps), "BACKYARD" (white, Fraunces 30px), "PROS" (amber, Fraunces 18px). Navbar height is `h-24`.
+- **Hero (home page):** `public/images/logo-hex.png` — the hexagon badge, at `w-[200px] sm:w-[280px] lg:w-[320px] h-auto`, `rounded-2xl`, no CSS filter.
+- **Footer:** `logo-hex.png` at `h-24 w-auto`, no CSS filter.
+- **`public/images/logo-primary.png`** — the SF-skyline badge extracted from the brand spec sheet. No longer used anywhere; kept in the repo.
+- **`public/images/logo-color.png`** and **`logo-badge.png`** — no longer used anywhere.
+- **Do not apply `brightness(0) invert(1)` to any badge logo** — they have white interior fills, so the filter turns them into solid white blobs. Show them in natural colors.
 
 ## Anti-Generic Guardrails
 - **Colors:** Never use default Tailwind palette (indigo-500, blue-600, etc.). Pick a custom brand color and derive from it.
@@ -103,12 +103,11 @@ Custom Tailwind tokens defined in `tailwind.config.ts`:
 | `/shop` | Product listings with Buy Now → checkout flow |
 | `/checkout` | Add-ons picker, zip code delivery fee lookup, order summary → Stripe |
 | `/checkout/success` | Post-payment confirmation page |
-| `/book` | Booking page with Calendly widget placeholder |
 | `/about` | About page — Nate + Quinn + Peter, father & sons story |
 | `/contact` | Contact form (client component) + contact info |
 
 ## Key Components
-- `components/Navbar.tsx` — always `bg-charcoal`, white text, amber "Book Now" button, `logo-primary.png` in natural colors (no filter)
+- `components/Navbar.tsx` — always `bg-charcoal`, white text, amber "Get a Quote" button → `/contact`, text wordmark (no logo image)
 - `components/Footer.tsx` — dark footer with links, phone, service area
 - `components/ContactForm.tsx` — `"use client"` form (split from contact/page.tsx to allow metadata)
 - `components/ui/button.tsx` — variants: default, amber, outline, ghost, link, outline-amber, forest
@@ -170,7 +169,6 @@ All real photos live in `public/images/`:
 - [ ] Formspree form ID — add `NEXT_PUBLIC_FORMSPREE_ID` to `.env.local`
 - [ ] Shop product photos (Nate will supply photos of each trampoline size)
 - [ ] About page photo (placeholder box is there, ready to receive image)
-- [ ] Set up Calendly (or similar) on the book page
 - [ ] Deploy to Vercel + connect domain
 
 ## Decisions & Preferences

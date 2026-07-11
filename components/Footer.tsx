@@ -110,26 +110,8 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-amber mt-0.5 shrink-0" />
-                <a href="mailto:nate@bayareabackyardpros.com" className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all">
-                  nate@bayareabackyardpros.com
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-amber mt-0.5 shrink-0" />
-                <a href="mailto:sales@bayareabackyardpros.com" className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all">
-                  sales@bayareabackyardpros.com
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-amber mt-0.5 shrink-0" />
-                <a href="mailto:install@bayareabackyardpros.com" className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all">
-                  install@bayareabackyardpros.com
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-amber mt-0.5 shrink-0" />
-                <a href="mailto:support@bayareabackyardpros.com" className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all">
-                  support@bayareabackyardpros.com
+                <a href="mailto:nate@backyardbros.co" className="text-white/60 text-sm font-sans hover:text-white transition-colors break-all">
+                  nate@backyardbros.co
                 </a>
               </li>
               <li className="flex items-start gap-3">

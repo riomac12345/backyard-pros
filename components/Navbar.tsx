@@ -54,7 +54,7 @@ export function Navbar() {
               Backyard
             </span>
             <span className="font-fraunces text-[18px] font-bold text-amber tracking-[0.2em] leading-tight uppercase">
-              Pros
+              Bros
             </span>
           </Link>
 

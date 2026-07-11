@@ -34,10 +34,7 @@ const contactInfo = [
 ];
 
 const emails = [
-  { label: "General", value: "nate@bayareabackyardpros.com", href: "mailto:nate@bayareabackyardpros.com", description: "General inquiries" },
-  { label: "Sales", value: "sales@bayareabackyardpros.com", href: "mailto:sales@bayareabackyardpros.com", description: "Buying a trampoline" },
-  { label: "Installation", value: "install@bayareabackyardpros.com", href: "mailto:install@bayareabackyardpros.com", description: "Installation & setup" },
-  { label: "Support", value: "support@bayareabackyardpros.com", href: "mailto:support@bayareabackyardpros.com", description: "Repairs & service" },
+  { label: "General", value: "nate@backyardbros.co", href: "mailto:nate@backyardbros.co", description: "General inquiries" },
 ];
 
 export default function ContactPage() {

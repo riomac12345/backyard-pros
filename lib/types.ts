@@ -12,3 +12,11 @@ export type Product = {
   created_at: string;
   updated_at: string;
 };
+
+export type AboutContent = {
+  id: number;
+  intro_text: string;
+  story_text: string;
+  photo_url: string | null;
+  updated_at: string;
+};

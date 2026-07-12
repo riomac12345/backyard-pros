@@ -10,12 +10,25 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { createClient } from "@/lib/supabase/server";
+import type { AboutContent } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "About — Local Experts You Can Trust",
   description:
     "Meet Nate Macdonald and his sons Quinn and Peter — the Mill Valley family behind The Bay Area Backyard Pros. Expert Springfree trampoline service built on trust.",
 };
+
+const defaultIntro =
+  "Hi — I'm Nate Macdonald, a Mill Valley teacher, and together with my sons Quinn and Peter, we run The Bay Area Backyard Pros. Sometimes we work jobs together, sometimes we split up and cover more ground — but it's always one of us showing up for you.";
+
+const defaultStory = `I've been a teacher in Mill Valley for years, and that background shaped everything about how I approach this work. You spend enough time around kids and you develop a pretty strong instinct for what keeps them safe — and what doesn't.
+
+When we got a Springfree trampoline for our own backyard, I was immediately impressed. No springs on the outside. Soft frame edge. A design that genuinely thought through the ways kids get hurt and engineered them away. My boys and I all became believers.
+
+What I noticed was that families in the Bay Area who wanted a Springfree didn't have a great local option. Big box stores didn't carry them. Buying one used online felt like a gamble. There was no one to call if something needed fixing. So the boys and I stepped in — got trained on the product, built relationships with suppliers, and started helping neighbors get set up safely.
+
+Three years in, we've helped hundreds of families across Mill Valley, Tiburon, San Rafael, and beyond. Sometimes all of us are on the same job; sometimes Quinn or Peter heads out solo. Either way, every job gets the same care and attention. These are our neighbors — we don't cut corners.`;
 
 const values = [
   {
@@ -38,7 +51,20 @@ const values = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("about_content")
+    .select("*")
+    .eq("id", 1)
+    .single();
+
+  const content = data as AboutContent | null;
+  const introText = content?.intro_text || defaultIntro;
+  const storyText = content?.story_text || defaultStory;
+  const photoUrl = content?.photo_url ?? null;
+  const storyParagraphs = storyText.split(/\n\s*\n/).filter((p) => p.trim());
+
   return (
     <>
       {/* Hero */}
@@ -56,10 +82,7 @@ export default function AboutPage() {
                 <span className="text-forest italic">You Can Trust</span>
               </h1>
               <p className="text-charcoal-muted text-xl font-sans leading-relaxed mb-10">
-                Hi — I&apos;m Nate Macdonald, a Mill Valley teacher, and together
-                with my sons Quinn and Peter, we run The Bay Area Backyard Pros.
-                Sometimes we work jobs together, sometimes we split up and cover
-                more ground — but it&apos;s always one of us showing up for you.
+                {introText}
               </p>
               <div className="flex gap-10">
                 <div>
@@ -76,16 +99,23 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-            {/* Photo placeholder */}
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] border-2 border-dashed border-charcoal/20 bg-charcoal/5 flex flex-col items-center justify-center gap-3">
-              <div className="w-14 h-14 rounded-full bg-charcoal/10 flex items-center justify-center">
-                <svg className="w-7 h-7 text-charcoal/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
-                </svg>
+            {/* Photo */}
+            {photoUrl ? (
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={photoUrl} alt="Nate, Quinn, and Peter" className="w-full h-full object-cover" />
               </div>
-              <span className="text-charcoal/35 text-sm font-sans">Photo coming soon</span>
-            </div>
+            ) : (
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] border-2 border-dashed border-charcoal/20 bg-charcoal/5 flex flex-col items-center justify-center gap-3">
+                <div className="w-14 h-14 rounded-full bg-charcoal/10 flex items-center justify-center">
+                  <svg className="w-7 h-7 text-charcoal/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+                  </svg>
+                </div>
+                <span className="text-charcoal/35 text-sm font-sans">Photo coming soon</span>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -97,33 +127,9 @@ export default function AboutPage() {
           </h2>
 
           <div className="space-y-6 text-charcoal-muted font-sans text-lg leading-relaxed">
-            <p>
-              I&apos;ve been a teacher in Mill Valley for years, and that background
-              shaped everything about how I approach this work. You spend enough
-              time around kids and you develop a pretty strong instinct for what
-              keeps them safe — and what doesn&apos;t.
-            </p>
-            <p>
-              When we got a Springfree trampoline for our own backyard, I was
-              immediately impressed. No springs on the outside. Soft frame edge.
-              A design that genuinely thought through the ways kids get hurt and
-              engineered them away. My boys and I all became believers.
-            </p>
-            <p>
-              What I noticed was that families in the Bay Area who wanted a Springfree
-              didn&apos;t have a great local option. Big box stores didn&apos;t carry
-              them. Buying one used online felt like a gamble. There was no one
-              to call if something needed fixing. So the boys and I stepped in —
-              got trained on the product, built relationships with suppliers, and
-              started helping neighbors get set up safely.
-            </p>
-            <p>
-              Three years in, we&apos;ve helped hundreds of families across Mill
-              Valley, Tiburon, San Rafael, and beyond. Sometimes all of us
-              are on the same job; sometimes Quinn or Peter heads out
-              solo. Either way, every job gets the same care and attention.
-              These are our neighbors — we don&apos;t cut corners.
-            </p>
+            {storyParagraphs.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
           </div>
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">

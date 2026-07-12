@@ -19,7 +19,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://thebackyardpros.com"),
+  metadataBase: new URL("https://backyardbros.co"),
   title: {
     default: "The Bay Area Backyard Pros | Springfree Trampoline Sales & Service",
     template: "%s | The Bay Area Backyard Pros",

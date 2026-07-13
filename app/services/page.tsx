@@ -108,7 +108,7 @@ const services = [
     ctaSecondaryHref: "tel:+14157288244",
     accentColor: "amber",
     imageHint: "Moving a trampoline safely",
-    image: undefined as string | undefined,
+    image: "/images/relocation.jpeg" as string | undefined,
   },
 ];
 

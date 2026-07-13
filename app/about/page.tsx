@@ -90,7 +90,7 @@ export default async function AboutPage() {
                   <div className="text-charcoal-muted text-sm font-sans mt-1">Years Serving Families</div>
                 </div>
                 <div>
-                  <div className="font-fraunces text-4xl font-bold text-forest">500+</div>
+                  <div className="font-fraunces text-4xl font-bold text-forest">100+</div>
                   <div className="text-charcoal-muted text-sm font-sans mt-1">Happy Customers</div>
                 </div>
                 <div>

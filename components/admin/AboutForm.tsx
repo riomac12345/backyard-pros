@@ -79,7 +79,7 @@ export function AboutForm({ content }: { content: AboutContent }) {
         <CardContent className="p-6 flex flex-col gap-2">
           <Label htmlFor="intro">Intro text (top of the About page)</Label>
           <p className="text-charcoal-muted text-xs font-sans -mt-1 mb-1">
-            The short paragraph under the "Local Experts You Can Trust" heading.
+            The short paragraph under the &quot;Local Experts You Can Trust&quot; heading.
           </p>
           <Textarea
             id="intro"
@@ -92,7 +92,7 @@ export function AboutForm({ content }: { content: AboutContent }) {
 
       <Card>
         <CardContent className="p-6 flex flex-col gap-2">
-          <Label htmlFor="story">Story ("How It Started" section)</Label>
+          <Label htmlFor="story">Story (&quot;How It Started&quot; section)</Label>
           <p className="text-charcoal-muted text-xs font-sans -mt-1 mb-1">
             Leave a blank line between paragraphs — each one will show up as its own paragraph on the page.
           </p>
